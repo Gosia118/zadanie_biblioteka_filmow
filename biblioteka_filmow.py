@@ -28,20 +28,20 @@ class Series(Movie):
         return f"{self.title} S{self.season_number:02d}E{self.episode_number:02d}"
     
 
-def get_movies():
+def get_movies(library):
     print("Filmy:")
     list_of_movies = list(filter(lambda x: isinstance(x, Movie) and not isinstance(x, Series), library))
     movies_sorted_by_title = sorted(list_of_movies, key=lambda movie: movie.title)
     print(movies_sorted_by_title)
 
 
-def get_series():
+def get_series(library):
     print("Seriale:")
     list_of_series = list(filter(lambda x : isinstance(x, Series), library))
     series_sorted_by_title = sorted(list_of_series, key=lambda series: series.title)
     print(series_sorted_by_title)
 
-def search():
+def search(library):
     searched_title = input("Podaj tytuł: ")
     found = False
     for item in library:
@@ -53,18 +53,18 @@ def search():
     else:
         print(f"Nie znaleziono tytułu: {searched_title}")
 
-def generate_views():
+def generate_views(library):
     item = random.choice(library)
     number_of_plays = random.randint(1, 100)
     item.play(number_of_plays)
     print (f"{item} - ilość odtworzeń {number_of_plays}")
 
-def generate_views_10_times(generate_views):
+def generate_views_10_times(library):
     print("--------")
     for i in range(10):
-        generate_views()
+        generate_views(library)
 
-def top_titles():
+def top_titles(library):
     print("Najpopularniejsze tytuły z biblioteki")
     a = int(input("Podaj liczbę: "))
     sorted_titles = sorted(library, key=lambda item: item.number_of_plays, reverse=True)
@@ -97,10 +97,10 @@ if __name__ == "__main__":
     print("Bibliotekę filmów i seriali")
     print(movie1)
     print(series1)
-    get_movies()
-    get_series()
-    search()
-    generate_views()
-    generate_views_10_times(generate_views)
-    top_titles()
+    get_movies(library)
+    get_series(library)
+    search(library)
+    generate_views(library)
+    generate_views_10_times(library)
+    top_titles(library)
     
